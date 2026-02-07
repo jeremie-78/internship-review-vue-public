@@ -4,13 +4,11 @@
 
 À la fin de cette branche, vous serez capable de :
 
-- ✅ Créer un service pour communiquer avec une API
-- ✅ Utiliser `fetch` pour récupérer des données
-- ✅ Gérer les états de chargement et d'erreur
-- ✅ Utiliser `v-for` pour afficher des listes
-- ✅ Créer un composant de carte pour afficher des données
-- ✅ Utiliser les props pour passer des données à un composant
-- ✅ Créer une page de résultats avec gestion d'états
+- ✅ Créer un service pour communiquer avec une API et récupérer des données
+- ✅ Gérer les états de chargement et d'erreur dans une page
+- ✅ Créer un composant réutilisable qui reçoit des données et les affiche
+- ✅ Afficher une liste d'éléments dynamiques dans une page
+- ✅ Créer une page de résultats avec chargement, erreur et liste d'offres
 
 ## 📚 Concepts théoriques nécessaires
 
@@ -24,15 +22,17 @@ Avant de commencer, assurez-vous d'avoir lu et compris :
 
 Dans cette branche, vous allez créer l'affichage des offres de stage avec :
 
-- Un service `offerService` pour récupérer les offres depuis l'API
-- Un composant `OfferCard` pour afficher une offre individuelle
-- Une page `ResultsPage` qui affiche la liste des offres
+- Un service pour récupérer les offres depuis l'API
+- Un composant carte pour afficher une offre individuelle
+- Une page de résultats qui affiche la liste des offres
 - Gestion des états de chargement et d'erreur
-- Utilisation de `v-for` pour itérer sur les offres
+- Un affichage en grille responsive des cartes
 
 ## 🛠️ Consignes étape par étape
 
-### Étape 1 : Créer le service offerService
+L'ordre proposé permet de voir la page dès l'étape 2 en naviguant vers `/results`, puis d'enrichir l'affichage étape par étape.
+
+### Étape 1 : Créer le service des offres
 
 **Objectif** : Créer un service pour récupérer les offres depuis l'API json-server.
 
@@ -51,13 +51,28 @@ Dans cette branche, vous allez créer l'affichage des offres de stage avec :
 
 ---
 
-### Étape 2 : Créer le composant OfferCard
+### Étape 2 : Configurer la route et créer la page de résultats
+
+**Objectif** : Rendre la page de résultats accessible via l'URL `/results`.
+
+1. Créez le fichier `src/pages/ResultsPage.vue` (le contenu peut être minimal pour l'instant, par exemple un titre ou un message)
+
+2. Ouvrez le fichier de configuration du router et ajoutez une route :
+   - La route doit être accessible via `/results`
+   - Elle doit afficher la page ResultsPage
+   - Elle doit s'intégrer à la structure de navigation existante
+
+**Point de contrôle** : En allant sur `/results`, la page ResultsPage s'affiche (même si le contenu est encore basique).
+
+---
+
+### Étape 3 : Créer le composant carte d'offre
 
 **Objectif** : Créer un composant pour afficher une offre de stage.
 
 1. Créez le fichier `src/components/OfferCard.vue`
 
-2. Le composant doit recevoir les données d'une offre en paramètre (utilisez les props)
+2. Le composant doit recevoir les données d'une offre en paramètre
 
 3. Le composant doit afficher les informations suivantes :
    - Le titre de l'offre
@@ -74,17 +89,15 @@ Dans cette branche, vous allez créer l'affichage des offres de stage avec :
 
 ---
 
-### Étape 3 : Créer la page ResultsPage
+### Étape 4 : Compléter la page ResultsPage (données et états)
 
-**Objectif** : Créer une page qui affiche la liste des offres avec gestion d'états.
+**Objectif** : Afficher la liste des offres sur la page avec gestion du chargement et des erreurs.
 
-1. Créez le fichier `src/pages/ResultsPage.vue`
-
-2. La page doit charger les offres au démarrage :
+1. La page doit charger les offres au démarrage :
    - Appeler le service pour récupérer les offres
    - Stocker les offres récupérées pour les afficher
 
-3. La page doit gérer différents états d'affichage :
+2. La page doit gérer différents états d'affichage :
 
    **Pendant le chargement** :
    - Afficher un indicateur ou un message pour informer l'utilisateur que les données sont en cours de chargement
@@ -95,30 +108,16 @@ Dans cette branche, vous allez créer l'affichage des offres de stage avec :
 
    **Quand les données sont chargées** :
    - Afficher la liste des offres
-   - Utiliser le composant `OfferCard` pour chaque offre
+   - Utiliser le composant carte pour chaque offre
 
    **Si aucune offre n'est disponible** :
    - Afficher un message informatif
 
-4. Organisez l'affichage des cartes en grille responsive :
+3. Organisez l'affichage des cartes en grille responsive :
    - Une colonne sur mobile
    - Plusieurs colonnes sur les écrans plus larges
 
-**Point de contrôle** : La page doit afficher les offres, gérer le chargement et les erreurs de manière appropriée.
-
----
-
-### Étape 4 : Configurer la route
-
-**Objectif** : Ajouter la route pour accéder à la page de résultats.
-
-1. Ouvrez le fichier de configuration du router
-
-2. Ajoutez une nouvelle route pour la page ResultsPage :
-   - La route doit être accessible via `/results`
-   - Elle doit être intégrée dans la structure de navigation existante
-
-**Point de contrôle** : La navigation vers `/results` doit afficher la page ResultsPage avec la liste des offres.
+**Point de contrôle** : La page affiche les offres, gère le chargement et les erreurs de manière appropriée.
 
 ---
 

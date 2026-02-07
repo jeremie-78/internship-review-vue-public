@@ -56,22 +56,26 @@ async function example() {
 
 ## Exemple complet : Service API
 
-### Créer un service
+L’idée est d’avoir un fichier de configuration pour l’URL de base, puis un service qui regroupe les appels HTTP. Voici un exemple avec une API **d’articles** (le principe est le même pour n’importe quelle ressource).
+
+### Fichier de configuration
 
 ```js
-// src/services/api.js
-const API_BASE_URL = 'http://localhost:3000'
+// Exemple : src/services/api.js
+const API_BASE_URL = 'https://api.example.com'
 
 export { API_BASE_URL }
 ```
 
+### Service qui appelle l’API
+
 ```js
-// src/services/offerService.js
+// Exemple : src/services/articleService.js (principe général)
 import { API_BASE_URL } from './api.js'
 
-export async function getOffers() {
+export async function getArticles() {
   try {
-    const response = await fetch(`${API_BASE_URL}/offers`)
+    const response = await fetch(`${API_BASE_URL}/articles`)
     
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`)
@@ -79,14 +83,14 @@ export async function getOffers() {
     
     return await response.json()
   } catch (error) {
-    console.error('Erreur lors de la récupération des offres:', error)
+    console.error('Erreur lors de la récupération des articles:', error)
     throw error
   }
 }
 
-export async function getOfferById(id) {
+export async function getArticleById(id) {
   try {
-    const response = await fetch(`${API_BASE_URL}/offers/${id}`)
+    const response = await fetch(`${API_BASE_URL}/articles/${id}`)
     
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`)
@@ -94,7 +98,7 @@ export async function getOfferById(id) {
     
     return await response.json()
   } catch (error) {
-    console.error(`Erreur lors de la récupération de l'offre ${id}:`, error)
+    console.error(`Erreur lors de la récupération de l'article ${id}:`, error)
     throw error
   }
 }
@@ -102,22 +106,24 @@ export async function getOfferById(id) {
 
 ## Utilisation dans un composant Vue
 
+On peut appliquer le même schéma dans n’importe quel composant : état de chargement, erreur, liste de données. Exemple avec des **articles** :
+
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getOffers } from '../services/offerService.js'
+import { getArticles } from '../services/articleService.js'
 
-const offers = ref([])
+const articles = ref([])
 const isLoading = ref(true)
 const isError = ref(false)
 
-async function loadOffers() {
+async function loadArticles() {
   isLoading.value = true
   isError.value = false
   
   try {
-    const data = await getOffers()
-    offers.value = data
+    const data = await getArticles()
+    articles.value = data
   } catch (error) {
     isError.value = true
     console.error(error)
@@ -127,7 +133,7 @@ async function loadOffers() {
 }
 
 onMounted(() => {
-  loadOffers()
+  loadArticles()
 })
 </script>
 
@@ -135,8 +141,8 @@ onMounted(() => {
   <div v-if="isLoading">Chargement...</div>
   <div v-else-if="isError">Erreur lors du chargement</div>
   <div v-else>
-    <div v-for="offer in offers" :key="offer.id">
-      {{ offer.title }}
+    <div v-for="article in articles" :key="article.id">
+      {{ article.title }}
     </div>
   </div>
 </template>
@@ -174,17 +180,19 @@ async function fetchData() {
 
 ## Requêtes POST, PUT, DELETE
 
+Le même principe s’applique à toute ressource. Exemple avec une API **commentaires** :
+
 ### POST
 
 ```js
-async function createOffer(offerData) {
+async function createComment(commentData) {
   try {
-    const response = await fetch(`${API_BASE_URL}/offers`, {
+    const response = await fetch(`${API_BASE_URL}/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(offerData)
+      body: JSON.stringify(commentData)
     })
     
     if (!response.ok) {
@@ -202,13 +210,13 @@ async function createOffer(offerData) {
 ### PUT
 
 ```js
-async function updateOffer(id, offerData) {
-  const response = await fetch(`${API_BASE_URL}/offers/${id}`, {
+async function updateComment(id, commentData) {
+  const response = await fetch(`${API_BASE_URL}/comments/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(offerData)
+    body: JSON.stringify(commentData)
   })
   
   return await response.json()
@@ -218,8 +226,8 @@ async function updateOffer(id, offerData) {
 ### DELETE
 
 ```js
-async function deleteOffer(id) {
-  const response = await fetch(`${API_BASE_URL}/offers/${id}`, {
+async function deleteComment(id) {
+  const response = await fetch(`${API_BASE_URL}/comments/${id}`, {
     method: 'DELETE'
   })
   
