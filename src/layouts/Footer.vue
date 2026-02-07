@@ -1,4 +1,5 @@
 <script setup>
+defineOptions({ name: 'AppFooter' })
 const currentYear = new Date().getFullYear()
 </script>
 

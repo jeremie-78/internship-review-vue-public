@@ -1,4 +1,5 @@
 <script setup>
+defineOptions({ name: 'AppHeader' })
 import { RouterLink } from 'vue-router'
 </script>
 
