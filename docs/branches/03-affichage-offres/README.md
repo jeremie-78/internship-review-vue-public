@@ -50,22 +50,7 @@ L'ordre proposé part du service (recherche), puis de la barre de recherche cont
 
 ---
 
-### Étape 2 : Rendre la barre de recherche contrôlable par la page
-
-**Objectif** : Permettre à la page parente de contrôler la valeur affichée dans le champ de recherche.
-
-1. Ouvrez le fichier `src/components/SearchBar.vue`
-
-2. Modifiez le composant pour que :
-   - La page parente puisse fournir la valeur affichée dans le champ
-   - La valeur se mette à jour quand l'utilisateur tape
-   - Le parent soit notifié lors de la soumission (clic sur « Rechercher »)
-
-**Point de contrôle** : La page parente peut contrôler la valeur affichée dans le champ de recherche.
-
----
-
-### Étape 3 : Faire naviguer la page d'accueil vers les résultats avec le terme dans l'URL
+### Étape 2 : Faire naviguer la page d'accueil vers les résultats avec le terme dans l'URL
 
 **Objectif** : Lors d'une recherche depuis la page d'accueil, aller vers la page de résultats en mettant le terme de recherche dans l'URL.
 
@@ -81,7 +66,7 @@ L'ordre proposé part du service (recherche), puis de la barre de recherche cont
 
 ---
 
-### Étape 4 : Lire l'URL, afficher les résultats filtrés et réagir aux changements
+### Étape 3 : Lire l'URL, afficher les résultats filtrés et réagir aux changements
 
 **Objectif** : Afficher les offres selon le terme présent dans l'URL et mettre à jour l'affichage quand l'URL change (par exemple bouton retour).
 
@@ -94,16 +79,45 @@ L'ordre proposé part du service (recherche), puis de la barre de recherche cont
 
 3. Quand l'URL change (par exemple bouton retour du navigateur), la page doit mettre à jour les résultats en fonction des nouveaux paramètres
 
-4. Ajoutez la barre de recherche sur la page de résultats :
+4. Quand aucun argument n'est présent dans l'URL, afficher toutes les offres
+
+**Point de contrôle** : La page affiche les résultats selon l'URL et se met à jour quand l'URL change ; la barre de recherche est synchronisée avec l'URL.
+
+---
+
+### Étape 4 : Rendre la barre de recherche contrôlable par la page
+
+**Objectif** : Permettre à la page parente de contrôler la valeur affichée dans le champ de recherche.
+
+1. Ouvrez le fichier `src/components/SearchBar.vue`
+
+2. Modifiez le composant pour que :
+   - La page parente puisse fournir la valeur affichée dans le champ
+   - La valeur se mette à jour quand l'utilisateur tape
+   - Le parent soit notifié lors de la soumission (clic sur « Rechercher »)
+
+**Point de contrôle** : La page parente peut contrôler la valeur affichée dans le champ de recherche.
+
+---
+
+### Étape 5 : Ajouter la barre de recherche sur la page de résultats
+
+**Objectif** : Ajouter la barre de recherche sur la page de résultats et mettre un indicateur de recherche en cours.
+
+1. Ajoutez la barre de recherche sur la page de résultats :
    - La valeur affichée dans la barre doit correspondre au paramètre de l'URL
    - L'utilisateur doit pouvoir lancer une nouvelle recherche depuis cette page
    - L'utilisateur doit pouvoir effacer la recherche pour voir à nouveau toutes les offres
 
-5. Affichage :
+2. Affichage :
    - Indiquer le terme de recherche actuel quand une recherche est en cours
    - Permettre de « nettoyer » la recherche pour afficher toutes les offres
 
-**Point de contrôle** : La page affiche les résultats selon l'URL et se met à jour quand l'URL change ; la barre de recherche est synchronisée avec l'URL.
+3. Quand aucun résultat n'est trouvé :
+   - Afficher un message informatif
+   - Afficher un bouton pour afficher toutes les offres
+
+**Point de contrôle** : La barre de recherche est affichée sur la page de résultats et met un indicateur de recherche en cours.
 
 ---
 
