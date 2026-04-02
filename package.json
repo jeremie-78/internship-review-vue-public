@@ -1,0 +1,23 @@
+{
+  "name": "internship-review",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": ["apps/vue", "apps/nuxt"],
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "scripts": {
+    "clean-install": "node scripts/clean-install.mjs",
+    "dev:vue": "npm run dev -w apps/vue",
+    "dev:nuxt": "npm run dev -w apps/nuxt",
+    "build:vue": "npm run build -w apps/vue",
+    "build:nuxt": "npm run build -w apps/nuxt",
+    "test:vue": "npm run test:unit -w apps/vue",
+    "json-server": "json-server --watch data/db.json --port 3000"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.4",
+    "vue": "^3.5.27"
+  }
+}
