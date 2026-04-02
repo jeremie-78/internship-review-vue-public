@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "test@example.com",
+      "password": "password123",
+      "name": "Test User",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "email": "admin@admin.com",
+      "password": "admin123",
+      "name": "Admin User",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ],
+  "offers": [
+    {
+      "id": 1,
+      "title": "Développeur Full Stack",
+      "company": "TechCorp",
+      "location": "Paris, France",
+      "type": "Stage",
+      "description": "Rejoignez notre équipe pour développer des applications web modernes avec Vue.js et Node.js.",
+      "salary": "800-1000€/mois",
+      "contractType": "Stage de 6 mois",
+      "startDate": "2024-09-01"
+    },
+    {
+      "id": 2,
+      "title": "Développeur Frontend React",
+      "company": "StartupInnov",
+      "location": "Lyon, France",
+      "type": "Stage",
+      "description": "Opportunité de stage pour travailler sur des interfaces utilisateur modernes avec React et TypeScript.",
+      "salary": "900-1100€/mois",
+      "contractType": "Stage de 4-6 mois",
+      "startDate": "2024-08-15"
+    },
+    {
+      "id": 3,
+      "title": "Data Analyst",
+      "company": "DataSolutions",
+      "location": "Toulouse, France",
+      "type": "Stage",
+      "description": "Stage en analyse de données avec Python, SQL et outils de visualisation.",
+      "salary": "750-950€/mois",
+      "contractType": "Stage de 5 mois",
+      "startDate": "2024-09-15"
+    },
+    {
+      "id": 4,
+      "title": "Développeur Mobile iOS",
+      "company": "MobileApps",
+      "location": "Remote",
+      "type": "Stage",
+      "description": "Développement d'applications iOS avec Swift et SwiftUI.",
+      "salary": "850-1050€/mois",
+      "contractType": "Stage de 6 mois",
+      "startDate": "2024-10-01"
+    }
+  ],
+  "favorites": []
+}
+
