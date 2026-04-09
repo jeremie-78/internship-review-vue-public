@@ -28,6 +28,13 @@ function handleLogout() {
             Accueil
           </NuxtLink>
           <NuxtLink
+            to="/historic"
+            class="px-4 py-2 rounded-lg hover:bg-white/10 transition-colors font-medium"
+            active-class="bg-white/20"
+          >
+            Historique
+          </NuxtLink>
+          <NuxtLink
             to="/results"
             class="px-4 py-2 rounded-lg hover:bg-white/10 transition-colors font-medium"
             active-class="bg-white/20"
