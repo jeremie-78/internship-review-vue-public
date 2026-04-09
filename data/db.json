@@ -69,9 +69,14 @@
       "date": "2024-01-01T00:00:00.000Z"
     },
     {
-      "trimmedQuery": "caca",
+      "text": "caca",
       "date": "2026-04-09T13:49:22.718Z",
       "id": 2
+    },
+    {
+      "text": "testdheçfzegzegz",
+      "date": "2026-04-09T14:02:09.231Z",
+      "id": 3
     }
   ]
 }

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { getSearches } from '~/composables/useSearches'
 import { FunnelIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
@@ -7,7 +8,9 @@ useSeoMeta({
   description: 'Recherchez et parcourez les offres de stage disponibles.',
 })
 
-const offers = ref<Offer[]>([])
+let searches = ref<Search[]>([])
+console.log("test")
+console.log(searches)
 const isLoading = ref(true)
 const isError = ref(false)
 const errorMessage = ref('')
@@ -21,12 +24,12 @@ const currentQuery = computed(() => {
   return typeof q === 'string' ? q : ''
 })
 
-async function loadOffers() {
+async function loadSearches() {
   isLoading.value = true
   isError.value = false
   errorMessage.value = ''
   try {
-    const searches = await getSearches();
+    searches.value = (await getSearches()).data;
   } catch (e: unknown) {
     const err = e as { error?: string }
     isError.value = true
@@ -35,6 +38,10 @@ async function loadOffers() {
     isLoading.value = false
   }
 }
+
+onMounted(() => {
+  loadSearches()
+})
 
 </script>
 
@@ -81,7 +88,7 @@ async function loadOffers() {
       </div>
 
       <!-- Message d'erreur -->
-      <div v-else-if="isError" class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+      <!-- <div v-else-if="isError" class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
         <p class="text-red-800 font-medium">{{ errorMessage }}</p>
         <button
           type="button"
@@ -90,10 +97,10 @@ async function loadOffers() {
         >
           Réessayer
         </button>
-      </div>
+      </div> -->
 
       <!-- Message si aucune offre -->
-      <div v-else-if="offers.length === 0" class="text-center py-20">
+      <!-- <div v-else-if="offers.length === 0" class="text-center py-20">
         <p v-if="currentQuery.trim()" class="text-gray-600 text-lg mb-2">
           Aucun résultat trouvé pour <span class="font-semibold">"{{ currentQuery }}"</span>
         </p>
@@ -104,16 +111,16 @@ async function loadOffers() {
             affichez toutes les offres
           </button>
         </p>
-      </div>
+      </div> -->
 
       <!-- Nombre de résultats et grille de cartes -->
-      <div v-else>
+      <div>
         <p class="text-gray-600 text-sm mb-6 text-center">
-          <span class="font-semibold text-gray-900">{{ offers.length }}</span>
-          {{ offers.length === 1 ? 'résultat trouvé' : 'résultats trouvés' }}
+          <span class="font-semibold text-gray-900">{{ searches.length }}</span>
+          {{ searches.length === 1 ? 'résultat trouvé' : 'résultats trouvés' }}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <OfferCard v-for="offer in offers" :key="offer.id" :offer="offer" />
+          <HistoricCard v-for="search in searches" :key="search.id" :search="search" />
         </div>
       </div>
     </div>

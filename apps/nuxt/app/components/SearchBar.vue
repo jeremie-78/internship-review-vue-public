@@ -3,8 +3,7 @@
 // Recherche à brancher dans une story ultérieure (pas de router.push ni appel API ici).
 import { computed } from 'vue'
 import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
-import { saveSearch, getSearches } from '~/composables/useSearches'
-import type { Search } from '~/composables/useSearches'
+import { saveSearch } from '~/composables/useSearches'
 
 const props = defineProps<{
   modelValue?: string
@@ -24,7 +23,8 @@ function handleSubmit() {
   const trimmedQuery = searchQuery.value.trim()
   if (!trimmedQuery) return
   const date = new Date().toISOString()
-  saveSearch({trimmedQuery, date})
+  const text = trimmedQuery;
+  saveSearch({text, date})
   emit('search', trimmedQuery)
 }
 </script>
