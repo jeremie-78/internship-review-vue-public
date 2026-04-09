@@ -1,8 +1,12 @@
 <script setup lang="ts">
 
+import { deleteSearch } from '~/composables/useSearches'
+
 const props = defineProps<{
   search: any
 }>()
+
+const emit = defineEmits(['deleted'])
 
 const router = useRouter()
 
@@ -14,6 +18,12 @@ function goToSearch() {
     }
   })
 }
+
+async function handleDelete() {
+  await deleteSearch(props.search.id)
+  console.log("deleted")
+  emit('deleted', props.search.id)
+}
 </script>
 
 <template>
@@ -24,7 +34,7 @@ function goToSearch() {
     >
     <h3 class="text-xl font-bold text-gray-900 mb-2">{{ search.date }}</h3>
     </span>
-    <button class="text-gray-400 hover:text-red-500 transition-colors">
+    <button class="text-gray-400 hover:text-red-500 transition-colors" @click.stop="handleDelete">
       <svg xmlns="http://www.w3.org/2000/svg"
            class="h-5 w-5"
            fill="none"

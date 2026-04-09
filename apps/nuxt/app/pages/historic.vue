@@ -43,6 +43,10 @@ onMounted(() => {
   loadSearches()
 })
 
+function removeSearch(id: number) {
+  searches.value = searches.value.filter(s => s.id !== id)
+}
+
 </script>
 
 <template>
@@ -120,7 +124,7 @@ onMounted(() => {
           {{ searches.length === 1 ? 'résultat trouvé' : 'résultats trouvés' }}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <HistoricCard v-for="search in searches" :key="search.id" :search="search" />
+          <HistoricCard v-for="search in searches" :key="search.id" :search="search" @deleted="removeSearch"/>
         </div>
       </div>
     </div>

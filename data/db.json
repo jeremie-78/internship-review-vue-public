@@ -62,31 +62,5 @@
     }
   ],
   "favorites": [],
-  "searches": [
-    {
-      "id": 1,
-      "text": "test",
-      "date": "2024-01-01T00:00:00.000Z"
-    },
-    {
-      "text": "caca",
-      "date": "2026-04-09T13:49:22.718Z",
-      "id": 2
-    },
-    {
-      "text": "testdheçfzegzegz",
-      "date": "2026-04-09T14:02:09.231Z",
-      "id": 3
-    },
-    {
-      "text": "fezfze",
-      "date": "2026-04-09T14:21:29.611Z",
-      "id": 4
-    },
-    {
-      "text": "fezfze",
-      "date": "2026-04-09T14:24:39.078Z",
-      "id": 5
-    }
-  ]
+  "searches": []
 }

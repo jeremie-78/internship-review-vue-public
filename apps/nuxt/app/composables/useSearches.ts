@@ -19,3 +19,9 @@ export async function getSearches() {
   const base = config.public.apiBase as string
   return axios.get<Search[]>(`${base.replace(/\/$/, '')}/searches`)
 }
+
+export async function deleteSearch(id: number) {
+  const config = useRuntimeConfig()
+  const base = config.public.apiBase as string
+  return axios.delete(`${base.replace(/\/$/, '')}/searches/${id}`)
+}
